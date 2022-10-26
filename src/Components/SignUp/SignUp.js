@@ -6,7 +6,7 @@ import './SignUp.css'
 
 const SignUp = () => {
     return (
-        <div className='py-10'>
+        <div className=''>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col ">
                     <div className="text-center lg:text-left">
@@ -39,7 +39,7 @@ const SignUp = () => {
                             <div className="form-control mt-6">
                                 <button type='submit' className="btn btn-primary">Sign Up</button>
                             </div>
-                            <div  className='cursor-pointer'>
+                            <div  className='cursor-pointer text-center mt-4'>
                                 <p>Sign Up With...</p>
                                 <div className='google-signup rounded mt-4 text-xl bg-teal-500 -300 text-center text-white p-3'>
                                     <FaGoogle className='mr-4 color-orange'/>
@@ -50,7 +50,7 @@ const SignUp = () => {
                                     Github
                                 </div>
                             </div>
-                            <div>
+                            <div className='text-center'>
                                 <p>Already have an account ?</p>
                                 <div className="form-control mt-6">
                                     <Link to='/login' className="btn btn-success">Login</Link>

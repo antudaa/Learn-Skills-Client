@@ -2,9 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle , FaGithub } from 'react-icons/fa';
 import './SignUp.css'
+import { useContext } from 'react';
+import { AuthContext } from '../Context/UserContext';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const SignUp = () => {
+
+    const { signInWithGoogle } = useContext(AuthContext);
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(googleProvider)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+    }
+
     return (
         <div className=''>
             <div className="hero min-h-screen bg-base-200">
@@ -41,7 +60,7 @@ const SignUp = () => {
                             </div>
                             <div  className='cursor-pointer text-center mt-4'>
                                 <p>Sign Up With...</p>
-                                <div className='google-signup rounded mt-4 text-xl bg-teal-500 -300 text-center text-white p-3'>
+                                <div onClick={handleGoogleSignIn} className='google-signup rounded mt-4 text-xl bg-teal-500 -300 text-center text-white p-3'>
                                     <FaGoogle className='mr-4 color-orange'/>
                                     Google
                                 </div>

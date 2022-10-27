@@ -23,20 +23,23 @@ const UserContext = ({children}) => {
     // const googleProvider = new GoogleAuthProvider();
 
 
-    // // Creating New User To Website...
-    // const createUser = (email, password ) => {
-    //     return createUserWithEmailAndPassword(auth , email, password);
-    // }
+    // Creating New User To Website...
+    const signUpWithEmail = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
 
-    // // Login OR SignIn System...
-    // const signIn = (email, password) => {
-    //     return signInWithEmailAndPassword(auth, email , password);
-    // }
+    // signIn OR SignIn System... With Email AND Password...
+    const signIn = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    }
 
 
     // Sign In with Google With Pop Up...
-    const signInWithGoogle = (Provider) => {
-        return signInWithPopup(auth, Provider);
+    const signInWithGoogle = (email, password) => {
+        setLoading(true);
+        return signInWithPopup(auth, email, password);
     }
 
     // Sign Out ...
@@ -47,19 +50,29 @@ const UserContext = ({children}) => {
 
     // To get Current User ...
     // 
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-    //         console.log('inside auth state change', currentUser);
-    //         setUser(currentUser)
-    //     });
-    //     return () => {
-    //         unsubscribe();
-    //     }
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log('inside auth state change', currentUser);
+            if(currentUser){
+                setUser(currentUser)
+            }
+            setLoading(false);
+        });
+        return () => {
+            unsubscribe();
+        }
 
-    // }, [])
+    }, [])
 
     
-    const authInfo = { user , signInWithGoogle , logOut };
+    const authInfo = { 
+        user , 
+        signIn , 
+        signInWithGoogle , 
+        logOut , 
+        signUpWithEmail,
+        loading
+    };
 
 
     return (

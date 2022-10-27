@@ -7,6 +7,8 @@ import FAQ from './Components/FAQ/FAQ';
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import Error from './Components/Error/Error';
+import PremiumAccess from './Components/PremiumAccess/PremiumAccess';
+import PrivateRoute from './Components/PrivateRoutes/PrivateRoute';
 
 
 function App() {
@@ -22,7 +24,9 @@ function App() {
         },
         {
           path : '/blogs',
-          element : <Blogs></Blogs>
+          element : <PrivateRoute>
+                    <Blogs></Blogs>
+                    </PrivateRoute>
         },
         {
           path : '/faq',
@@ -35,6 +39,12 @@ function App() {
         {
           path : '/signup',
           element : <SignUp></SignUp>
+        },
+        {
+          path : '/premium-access',
+          element : <PrivateRoute>
+            <PremiumAccess></PremiumAccess>
+            </PrivateRoute>
         }
       ]
 

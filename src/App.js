@@ -9,6 +9,7 @@ import SignUp from './Components/SignUp/SignUp';
 import Error from './Components/Error/Error';
 import PremiumAccess from './Components/PremiumAccess/PremiumAccess';
 import PrivateRoute from './Components/PrivateRoutes/PrivateRoute';
+import TermsConditions from './Components/TermsConditions/TermsConditions';
 
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
           element : <PrivateRoute>
             <PremiumAccess></PremiumAccess>
             </PrivateRoute>
+        },
+        {
+          path : '/terms',
+          element : <TermsConditions></TermsConditions>
         }
       ]
 

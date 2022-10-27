@@ -9,9 +9,11 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 const SignUp = () => {
 
-    const { signInWithGoogle, signUpWithEmail } = useContext(AuthContext);
+    const { signInWithGoogle, signUpWithEmail, updateUser , verifyEmail } = useContext(AuthContext);
 
-    const [error , setError] = useState('');
+    const [error, setError] = useState('');
+
+    const [accept , setAccept] = useState();
 
     const navigate = useNavigate();
 
@@ -42,8 +44,9 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                setError('');
-                navigate('/blogs');
+                setError();
+                handleUpdateUser(name, photoURL);
+                handleEmailVerify();
             })
             .catch(e => {
                 console.error("User Already Exist", e);
@@ -52,6 +55,26 @@ const SignUp = () => {
     }
 
 
+    const handleUpdateUser = (name , photoURL) =>{
+
+        const profile = {
+            displayName : name,
+            photoURL : photoURL
+        }
+        updateUser(profile)
+        .then(() =>{})
+        .catch((error) => console.error(error));
+    }
+
+    const handleEmailVerify = () => {
+        verifyEmail()
+        .then(() => {})
+        .catch((error) => console.error(error));
+    }
+
+    const handleTerms = (event) => {
+        setAccept(event.target.checked);
+    }
 
     return (
         <div className=''>
@@ -90,12 +113,20 @@ const SignUp = () => {
                                 <input type="password" name='password' placeholder="Password" className="input input-bordered" required />
 
                             </div>
+
+                            <div className="form-control">
+                                <label className="label cursor-pointer">
+                                    <span className="label-text">Please Accept <Link to='/terms'>terms & conditions</Link></span>
+                                    <input onClick={handleTerms} type="checkbox" className="checkbox checkbox-xs" />
+                                </label>
+                            </div>
+
                             <div className="form-control mt-6">
-                                <button type='submit' className="btn btn-primary">Sign Up</button>
+                                <button type='submit' disabled={!accept} className="btn btn-primary">Sign Up</button>
                             </div>
 
                             <div className='text-center mt-4'>
-                                <p className='text-rose-500	'>{error}</p>
+                                <p className='text-rose-500	'>{}</p>
                             </div>
 
                             <div className='cursor-pointer text-center mt-4'>

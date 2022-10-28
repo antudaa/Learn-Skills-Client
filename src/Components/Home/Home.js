@@ -16,24 +16,25 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='flex flex-col md:flex-row lg:flex-row'>
-            <aside  className='text-center w-20%'>
-                <h1 className='text-sky-400 my-8 text-2xl '>Our Courses Catagories</h1>
-                {
-                    catagories.map(course => <div className='my-2 text-xl text-teal-500'><Link to={`/course/${course.id}`} key={course.id}>{course.name}</Link></div>)
-                }
+        <div className='flex flex-col md:flex-row lg:flex-row px-6 my-16'>
+            <aside className='text-center w-20%'>
                 <div className=" my-10 ">
                     <Link className="btn btn-success">Get Premium Access</Link>
                 </div>
+                <h1 className='text-sky-400 my-8 text-2xl '>Our Courses Catagories</h1>
+                {
+                    catagories.map(course => <div className='my-2 text-xl text-teal-500'><Link to={`/course/${course.id}`} key={course.id} course={course}>{course.name}</Link></div>)
+                }
+
             </aside>
             <aside style={{ width: '80%', marginRight: 'auto', marginLeft: 'auto' }}>
                 <h1 className='text-sky-400 my-8 text-2xl text-center'>All Our Courses </h1>
-                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 '>
+                <div className='flex flex-wrap justify-center align-center gap-6'>
                     {
                         allCourse.map(course => (
                             <div className="card w-96 bg-base-100 shadow-xl">
                                 <figure className="px-10 pt-10">
-                                    <img style={{width:'250px', height : '200px'}} src={course.image_url} alt="Shoes" className="rounded-xl" />
+                                    <img style={{ width: '250px', height: '200px' }} src={course?.image_url} alt="Shoes" className="rounded-xl" />
                                 </figure>
                                 <div className="card-body items-center ">
                                     <h2 className="card-title text-center text-2xl text-emerald-500">{course.title}</h2>

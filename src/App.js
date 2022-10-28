@@ -18,62 +18,61 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path : '/', 
-      element : <Main></Main>,
-      children : [
+      path: '/',
+      element: <Main></Main>,
+      children: [
         {
-          path : '/',
-          loader : () => fetch('http://localhost:5000/course'),
-          element : <Home></Home>
+          path: '/',
+          loader: () => fetch('http://localhost:5000/course'),
+          element: <Home></Home>
         },
         {
-          path : '/courses',
-          element : <Courses></Courses>
+          path: '/courses',
+          element: <Courses></Courses>
         },
         {
-          path : '/blogs',
-          element : <PrivateRoute>
-                    <Blogs></Blogs>
-                    </PrivateRoute>
+          path: '/blogs',
+          element: <PrivateRoute>
+            <Blogs></Blogs>
+          </PrivateRoute>
         },
         {
-          path : '/faq',
-          element : <FAQ></FAQ>
+          path: '/faq',
+          element: <FAQ></FAQ>
         },
         {
-          path : '/login',
-          element : <Login></Login>
+          path: '/login',
+          element: <Login></Login>
         },
         {
-          path : '/signup',
-          element : <SignUp></SignUp>
+          path: '/signup',
+          element: <SignUp></SignUp>
         },
         {
-          path : '/premium-access',
-          element : <PrivateRoute>
+          path: '/premium-access',
+          element: <PrivateRoute>
             <PremiumAccess></PremiumAccess>
-            </PrivateRoute>
+          </PrivateRoute>
         },
         {
-          path : '/terms',
-          element : <TermsConditions></TermsConditions>
+          path: '/terms',
+          element: <TermsConditions></TermsConditions>
         },
         {
-          path : '/course',
-          // loader : ({params}) => fetch(`http://localhost:5000/course/${params.id}`),
-          element : <Course></Course>
+          path: '/course/:id',
+          loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`),
+          element: <Course></Course>
         },
         {
-          path : '/courses',
-          loader : () => fetch('http://localhost:5000/course'),
-          element : <Courses></Courses>,
+          path: '/courses',
+          element: <Courses></Courses>,
         }
       ]
 
     },
     {
-      path : '*',
-      element : <Error></Error>
+      path: '*',
+      element: <Error></Error>
     }
   ])
   return (

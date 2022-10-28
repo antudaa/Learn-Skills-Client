@@ -22,8 +22,8 @@ const Courses = () => {
 
 
     return (
-        <div className='flex flex-wrap flex-col md:flex-row lg:flex-row px-6 my-16'>
-            <aside style={{height : '370px'}} className='text-center w-20% bg-emerald-500 p-6 rounded-xl lg:fixed'>
+        <div className='flex flex-wrap flex-col md:flex-row lg:flex-row px-6 my-16 gap-6'>
+            <aside style={{height : '370px'}} className='text-center w-20% bg-emerald-500 p-6 rounded-xl '>
                 {/* <div className=" my-10 ">
                     <Link className="btn btn-success">Get Premium Access</Link>
                 </div> */}
@@ -34,7 +34,7 @@ const Courses = () => {
 
             </aside>
 
-            <aside style={{ width: '80%', marginRight: 'auto', marginLeft: 'auto' }}>
+            <aside style={{ width: '70%', marginRight: 'auto', marginLeft: 'auto' }}>
                 <h1 className='text-sky-400 my-8 text-2xl text-center'>All Our Courses </h1>
                 <div className='flex flex-wrap justify-center align-center gap-6'>
                     {

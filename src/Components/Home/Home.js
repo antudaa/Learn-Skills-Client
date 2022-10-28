@@ -1,24 +1,33 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import Course from './Course';
 
-const Courses = () => {
+const Home = () => {
 
     const allCourse = useLoaderData();
 
-    // const [catagories, setCatagories] = useState([]);
+    const [catagories, setCatagories] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/course-category')
-    //         .then(res => res.json())
-    //         .then(data => setCatagories(data));
-    // }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/course-category')
+            .then(res => res.json())
+            .then(data => setCatagories(data));
+    }, [])
 
     return (
-        <div>
-            <h1> className='text-sky-400 my-8 text-2xl text-center'>All Our Courses </h1>
+        <div className='flex flex-col md:flex-row lg:flex-row'>
+            <aside  className='text-center w-20%'>
+                <h1 className='text-sky-400 my-8 text-2xl '>Our Courses Catagories</h1>
+                {
+                    catagories.map(course => <div className='my-2 text-xl text-teal-500'><Link to={`/course/${course.id}`} key={course.id}>{course.name}</Link></div>)
+                }
+                <div className=" my-10 ">
+                    <Link className="btn btn-success">Get Premium Access</Link>
+                </div>
+            </aside>
+            <aside style={{ width: '80%', marginRight: 'auto', marginLeft: 'auto' }}>
+                <h1 className='text-sky-400 my-8 text-2xl text-center'>All Our Courses </h1>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 '>
                     {
                         allCourse.map(course => (
@@ -38,8 +47,9 @@ const Courses = () => {
                         ))
                     }
                 </div>
+            </aside>
         </div>
     );
 };
 
-export default Courses;
+export default Home;

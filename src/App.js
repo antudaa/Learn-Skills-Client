@@ -10,6 +10,8 @@ import Error from './Components/Error/Error';
 import PremiumAccess from './Components/PremiumAccess/PremiumAccess';
 import PrivateRoute from './Components/PrivateRoutes/PrivateRoute';
 import TermsConditions from './Components/TermsConditions/TermsConditions';
+import Course from './Components/Courses/Course';
+import Home from './Components/Home/Home';
 
 
 function App() {
@@ -19,6 +21,11 @@ function App() {
       path : '/', 
       element : <Main></Main>,
       children : [
+        {
+          path : '/',
+          loader : () => fetch('http://localhost:5000/course'),
+          element : <Home></Home>
+        },
         {
           path : '/courses',
           element : <Courses></Courses>
@@ -50,6 +57,16 @@ function App() {
         {
           path : '/terms',
           element : <TermsConditions></TermsConditions>
+        },
+        {
+          path : '/course',
+          // loader : ({params}) => fetch(`http://localhost:5000/course/${params.id}`),
+          element : <Course></Course>
+        },
+        {
+          path : '/courses',
+          loader : () => fetch('http://localhost:5000/course'),
+          element : <Courses></Courses>,
         }
       ]
 

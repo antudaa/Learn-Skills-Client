@@ -7,11 +7,11 @@ import FAQ from './Components/FAQ/FAQ';
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import Error from './Components/Error/Error';
-import PremiumAccess from './Components/PremiumAccess/PremiumAccess';
 import PrivateRoute from './Components/PrivateRoutes/PrivateRoute';
 import TermsConditions from './Components/TermsConditions/TermsConditions';
 import Course from './Components/Courses/Course';
 import Home from './Components/Home/Home';
+import CheckOut from './Components/CheckOut/CheckOut';
 
 
 function App() {
@@ -32,9 +32,7 @@ function App() {
         },
         {
           path: '/blogs',
-          element: <PrivateRoute>
-            <Blogs></Blogs>
-          </PrivateRoute>
+          element: <Blogs></Blogs>
         },
         {
           path: '/faq',
@@ -49,9 +47,10 @@ function App() {
           element: <SignUp></SignUp>
         },
         {
-          path: '/premium-access',
+          path: '/courses/:id',
+          loader : ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`),
           element: <PrivateRoute>
-            <PremiumAccess></PremiumAccess>
+            <CheckOut></CheckOut>
           </PrivateRoute>
         },
         {

@@ -18,9 +18,6 @@ const Home = () => {
     return (
         <div className='flex flex-col md:flex-row lg:flex-row px-6 my-16'>
             <aside className='text-center w-20%'>
-                <div className=" my-10 ">
-                    <Link className="btn btn-success">Get Premium Access</Link>
-                </div>
                 <h1 className='text-sky-400 my-8 text-2xl '>Our Courses Catagories</h1>
                 {
                     catagories.map(course => <div className='my-2 text-xl text-teal-500'><Link to={`/course/${course.id}`} key={course.id} course={course}>{course.name}</Link></div>)

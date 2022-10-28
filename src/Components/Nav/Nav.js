@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import icon from "../Images/logo.png";
 import { useRef } from "react";
-import { FaBars, FaTimes, FaUser } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser, FaMoon, FaSun } from "react-icons/fa";
 import './Nav.css'
 import { useContext } from 'react';
 import { AuthContext } from '../Context/UserContext';
@@ -10,6 +10,7 @@ import { AuthContext } from '../Context/UserContext';
 const Nav = () => {
 
     const { user, logOut } = useContext(AuthContext);
+
 
     const navRef = useRef();
     console.log("PhotoURL", user.photoURL)
@@ -20,8 +21,11 @@ const Nav = () => {
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
-            .catch((error) => console.error(error));
+        .then(() => {
+            console.log("Sign Out Successful.")
+            user({})
+         })
+        .catch((error) => console.error(error));
     }
 
     return (
@@ -67,7 +71,7 @@ const Nav = () => {
                 <Link className=''>
                     {
                         user?.photoURL ?
-                            <img
+                            <img 
                                 style={{ height: '36px', borderRadius: '50%' }}
                                 src={user?.photoURL}
                                 alt=''>
@@ -88,29 +92,3 @@ const Nav = () => {
 export default Nav;
 
 
-// {
-//     user.uid ?
-
-//         <>
-//             <Link className='text-black '>{user?.displayName}</Link>
-//             <button onClick={handleLogOut} className='mx-3 bg-indigo-600 text-white font-[Poppins] p?y-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500'>LogOut</button>
-//         </>
-//         :
-//         <>
-//             <Link to='/login' className='bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500'>Login</Link>
-//             <Link to='/signup' className='bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500'>SignUp</Link>
-//         </>
-// }
-
-// <Link className=''>
-//     {
-//         user.photoURL ?
-//             <img
-//                 style={{ height: '36px', borderRadius: '50%' }}
-//                 src={user.photoURL}
-//                 alt=''>
-//             </img>
-//             :
-//             <FaUser />
-//     }
-// </Link>

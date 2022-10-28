@@ -4,12 +4,12 @@ import { FaGoogle, FaGithub } from 'react-icons/fa';
 import './SignUp.css'
 import { useContext } from 'react';
 import { AuthContext } from '../Context/UserContext';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 
 const SignUp = () => {
 
-    const { signInWithGoogle, signUpWithEmail, updateUser , verifyEmail } = useContext(AuthContext);
+    const { signInWithGoogle, signUpWithEmail, updateUser , verifyEmail , githubSignUp } = useContext(AuthContext);
 
     const [error, setError] = useState('');
 
@@ -18,6 +18,19 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const googleProvider = new GoogleAuthProvider();
+
+    const gitProvider = new GithubAuthProvider();
+
+    const handleGithubSignUp = () =>{
+        githubSignUp(gitProvider)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            console.error("Error ", error);
+        })
+    }
 
     const handleGoogleSignIn = () => {
         signInWithGoogle(googleProvider)
@@ -135,7 +148,7 @@ const SignUp = () => {
                                     <FaGoogle className='mr-4 color-orange' />
                                     Google
                                 </div>
-                                <div className='google-signup my-4 rounded text-xl bg-teal-500 -300 text-center text-white p-3'>
+                                <div onClick={handleGithubSignUp} className='google-signup my-4 rounded text-xl bg-teal-500 -300 text-center text-white p-3'>
                                     <FaGithub className='mr-4' />
                                     Github
                                 </div>

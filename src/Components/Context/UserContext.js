@@ -22,6 +22,12 @@ const UserContext = ({children}) => {
         updateProfile(auth.currentUser, profile);
     }
 
+    // Github SignUp
+    const githubSignUp = (provider) => {
+        setLoading(true);
+        return signInWithPopup(auth, provider);
+    }
+
 
     // Creating New User To Website...
     const signUpWithEmail = (email, password) => {
@@ -76,11 +82,12 @@ const UserContext = ({children}) => {
         user , 
         signIn , 
         signInWithGoogle , 
-        logOut , 
+        logOut, 
         signUpWithEmail,
         loading,
         updateUser,
-        verifyEmail
+        verifyEmail,
+        githubSignUp
     };
 
 

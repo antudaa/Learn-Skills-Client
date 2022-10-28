@@ -1,29 +1,37 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Course = () => {
 
     const courseItems = useLoaderData();
+    console.log(courseItems);
 
     return (
-        <div className='flex flex-wrap justify-center align-center gap-6'>
+        <div>
+            <div className='text-4xl text-sky-400 text-center my-8'>
+                <h1>Hear Are The Related Courses{courseItems.course_title}</h1>
+            </div>
+            <div className='flex flex-wrap justify-center align-center gap-6 my-16'>
             {
                 courseItems.map(course => (
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure className="px-10 pt-10">
-                            <img style={{ width: '250px', height: '200px' }} src={course.image_url} alt="Shoes" className="rounded-xl" />
-                        </figure>
-                        <div className="card-body items-center ">
-                            <h2 className="card-title text-center text-2xl text-emerald-500">{course.title}</h2>
-                            <h4 className='text-xl text-teal-600'>Description</h4>
-                            <p className='text-justify'>{course.details}</p>
-                            <div className="card-actions">
-                                <button className="btn btn-primary">purchase Course</button>
+                    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+                        <figure><img src={course.image_url} alt="Shoes" /></figure>
+                        <div className="card-body">
+                            <h2 className="card-title">{course.title}</h2>
+                            <p>Price : ${course.course_price}</p>
+                            <div className='flex justify-between align-center'>
+                            <div className="card-actions justify-start">
+                                <Link to={`/courses/${course.id}`} key={course.id} course={course} className="btn btn-success">Get Premium Access</Link>
+                            </div>
+                            <div className="card-actions justify-end">
+                                <button className="btn btn-primary">Purchase</button>
+                            </div>
                             </div>
                         </div>
                     </div>
                 ))
             }
+        </div>
         </div>
     );
 };

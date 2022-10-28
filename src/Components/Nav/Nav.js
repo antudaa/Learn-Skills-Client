@@ -5,11 +5,22 @@ import { FaBars, FaTimes, FaUser, FaMoon, FaSun } from "react-icons/fa";
 import './Nav.css'
 import { useContext } from 'react';
 import { AuthContext } from '../Context/UserContext';
+import { useState } from 'react';
 
 
 const Nav = () => {
 
     const { user, logOut } = useContext(AuthContext);
+
+    const [dark, setDark] = useState(false);
+
+    const handleDarkMode = () => {
+        if (dark) {
+            setDark(false)
+        } else {
+            setDark(true)
+        }
+    }
 
 
     const navRef = useRef();
@@ -21,11 +32,10 @@ const Nav = () => {
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {
-            console.log("Sign Out Successful.")
-            user({})
-         })
-        .catch((error) => console.error(error));
+            .then(() => {
+                console.log("Sign Out Successful.")
+            })
+            .catch((error) => console.error(error));
     }
 
     return (
@@ -71,20 +81,26 @@ const Nav = () => {
                 <Link className=''>
                     {
                         user?.photoURL ?
-                            <img 
+                            <img
+                                className='mx-3'
+                                title={user?.displayName}
                                 style={{ height: '36px', borderRadius: '50%' }}
                                 src={user?.photoURL}
                                 alt=''>
                             </img>
                             :
-                            <FaUser />
+                            <FaUser className='mx-3' />
                     }
                 </Link>
             </nav>
+            <div onClick={handleDarkMode} className="cursor-pointer mx-3">
+                {dark ? <FaSun style={{ width: '24px', height: '24px' }} /> : <FaMoon style={{ width: '24px', height: '24px' }} />}
+            </div>
 
-            <button className="nav-btn" onClick={showNavbar}>
+            <button className="nav-btn mx-3" onClick={showNavbar}>
                 <FaBars />
             </button>
+
         </header>
     );
 };

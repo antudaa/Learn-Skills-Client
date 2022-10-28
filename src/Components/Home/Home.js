@@ -35,8 +35,7 @@ const Home = () => {
                                 </figure>
                                 <div className="card-body items-center ">
                                     <h2 className="card-title text-center text-2xl text-emerald-500">{course.title}</h2>
-                                    <h4 className='text-xl text-teal-600'>Description</h4>
-                                    <p className='text-justify'>{course.details}</p>
+                                    
                                     <div className="card-actions">
                                         <button className="btn btn-primary">purchase Course</button>
                                     </div>
